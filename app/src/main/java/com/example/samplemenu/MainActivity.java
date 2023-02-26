@@ -116,9 +116,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onContextItemSelected(MenuItem item)
     {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo(); //THUC CHIEN NHAT DINH DUNG
+        /*AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo(); //THUC CHIEN NHAT DINH DUNG
         TextView tx = (TextView) findViewById((int)info.id);
-        /*int pos = info.position;
+        int pos = info.position;
         String i = la.getItem(pos);*/
 
         switch (item.getItemId())
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
 
             case R.id.action_favorite:
-                tx.setTextSize(2,48);
+                txContext.setTextSize(3,48);
                 return true;
 
             default:
