@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     String msg;
     TextView txContext;
     ImageButton bt;
@@ -33,6 +33,35 @@ public class MainActivity extends AppCompatActivity {
         registerForContextMenu(txContext);
 
         //popup menu
+        bt = (ImageButton) findViewById(R.id.bt);
+        bt.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), Msg.class);
+        PopupMenu pm = new PopupMenu(this, view);
+        pm.getMenuInflater().inflate(R.menu.popup_menu, pm.getMenu());
+        pm.show();
+        pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.Search:
+                        msg = "This is Search Page Q";
+                        intent.putExtra("msg", msg);
+                        startActivity(intent);return true;
+
+                    case R.id.Account:
+                        msg = "This is Account Page <3:";
+                        intent.putExtra("msg", msg);
+                        startActivity(intent);return true;
+
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 
     @Override
@@ -107,33 +136,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     //popup
-    public void onClick(View v)
-    {
-        Intent intent = new Intent(this, Msg.class);
-        PopupMenu pm = new PopupMenu(this, v);
-        pm.getMenuInflater().inflate(R.menu.popup_menu, pm.getMenu());
-        pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId())
-                {
-                    case R.id.Search:
-                        msg = "This is Search Page Q";
-                        intent.putExtra("msg", msg);
-                        startActivity(intent);return true;
-
-                    case R.id.Account:
-                        msg = "This is Account Page <3:";
-                        intent.putExtra("msg", msg);
-                        startActivity(intent);return true;
-
-                    default:
-                        return false;
-                }
-            }
-        });
-        pm.show();
-    }
 
 }
 
